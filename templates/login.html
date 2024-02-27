@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+    
+</head>
+<body>
+
+<div class="container" id="login-box">
+    <div class="form-container sign-up-container">
+        <form method="post" action="{{url_for('register')}}">
+            <h1>注册</h1>           
+            <div class="txtb">
+                <input type="text" name="username">
+                <span data-placeholder="Useranme" ></span>
+            </div>
+            <div class="txtb">
+                <input type="email" name="email">
+                <span data-placeholder="Email" ></span>
+            </div> 
+            <div class="txtb">
+                <input type="password" name="password1">
+                <span data-placeholder="Password" ></span>
+            </div>
+            <div class="txtb">
+                <input type="password" name="password2">
+                <span data-placeholder="Confirm Password" ></span>
+            </div>            
+            <button>注册</button>
+            {% for message in get_flashed_messages() %} 
+            <div class="err-ms"><p><h5>{{message}}</h5></p></div>
+            {% endfor %}
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form method="post" action="{{url_for('login')}}">
+            <h1>登录</h1>
+            <div class="txtb">
+                <input type="username" name="username">
+                <span  data-placeholder="Username" ></span>
+            </div>
+            <div class="txtb">
+                <input type="password" name="password">
+                <span data-placeholder="Password"></span>
+            </div>
+            <a href="#" onclick="alert('密码都不记得？罚你玩会原神！')">忘记密码？</a>
+            <button>登录</button>
+            {% for message in get_flashed_messages() %} 
+            <div class="err-ms"><p><h5>{{message}}</h5></p></div>
+            {% endfor %}
+            
+        </form>
+    </div>
+
+    <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">  
+                    <h1>已有账号？</h1>
+                    <p>请使用您的账号进行登录</p>
+                    <button class="ghost" id="signIn" >立即登录</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h2>使用bilibili扫码登陆</h2>
+            <img src="../static/img/rickroll.png" alt="">
+                    <h3>没有账号？</h3>
+                    <button class="ghost" id="signUp">立即注册</button>
+                </div>
+            </div>
+        
+    </div>
+</div>
+</body>
+<script>
+    $("#signUp").click(function(){
+        $("#login-box").addClass('right-panel-active')
+    })
+
+    $("#signIn").click(function(){
+        $("#login-box").removeClass('right-panel-active')
+    })
+
+    $(".txtb input").on("focus",function(){
+        $(this).addClass("focus")
+    })
+
+    $(".txtb input").on("blur",function(){
+        if($(this).val() == '')
+        $(this).removeClass("focus")
+    })
+
+</script>
+</html>

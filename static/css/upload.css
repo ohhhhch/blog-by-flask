@@ -1,0 +1,33 @@
+#popup{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    height: 500px;
+    padding: 50px;
+    background-color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5;
+    border-radius: 20px;
+}
+
+#popup.active{
+    visibility:visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+#title{
+    text-align: center;
+}
+
+.pic{
+    position: fixed;
+    height: 200px;
+    width: 300px;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <template>
+        <div class="card" style="width: 600px; height: 600px; border: 1px solid #ccc; margin: 20px auto;">
+          <el-upload
+            class="upload"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            drag
+            multiple
+            :on-success="handleSuccess"
+            :on-error="handleError"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </el-upload>
+        </div>
+      </template>
+      
+      <script>
+      export default {
+        methods: {
+          handleSuccess(response, file, fileList) {
+            this.$message.success("文件上传成功");
+          },
+          handleError(error, file, fileList) {
+            this.$message.error("文件上传失败");
+          },
+        },
+      };
+      </script>
+      
+      <style>
+      .upload {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      </style>
+      
+</body>
+</html>
