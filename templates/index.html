@@ -15,10 +15,17 @@
 <body>
     <nav class="shell close">
         <header>
-            <div class="image-text" id='blur'>
+            {% if session['logged_in'] %}
+            <div class="image-text" >
                 <span class="image">
                     <a href="#" onclick="toge()">
-                    <img src="../static//img/profile photo.png" alt=""></a>
+                    <img src="{{profilePic}}" alt=""></a>
+                </span>
+            {% else %}
+                <span class="image">
+                    <a href="/login_page" >
+                    <img src="../static/img/profilephoto.png" alt=""></a>
+            {% endif %}
                 </span>
                 <div class="text logo-text">
                     <span class="name">{{name}}</span>
@@ -97,12 +104,21 @@
         </div>
     </content>
 
-    <div class="upload" id="popup">
-        <div id="title"><h1>UPLOAD</h1></div>
-        <div class="pic">
-            11
+    <div class="upload-container" id="popup">  
+        <div class="upload-header">  
+          <h2>更换头像</h2>  
+          <button class="close-btn">X</button>  
+        </div>  
+        <div class="upload-body">  
+          <input type="file" id="image-upload" accept="image/*">  
+          <div class="preview-container">  
+            <img id="preview-image" src="#" alt="预览图片" style="display: none;">  
+          </div>  
+        </div>  
+        <div>
+          <button class="upload-btn">上传</button>
         </div>
-    </div>
+      </div> 
     
 
 

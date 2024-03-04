@@ -1,7 +1,6 @@
-import time
-
-from flask import Flask, render_template, redirect, request, session,url_for,flash
+from flask import Flask, render_template, redirect, request, session,url_for,flash,send_file
 from flask_sqlalchemy import SQLAlchemy
+import os
 from database import db
 
 import config
@@ -39,9 +38,12 @@ def auth(func):
 def index():
     if 'username' in session:
         username=session['username']
+        user_info=User.query.filter_by(username=username).first()
+        avatar=user_info.avatar
     else:
+        avatar = 'static\img\profilephoto.png'
         username='欢迎'
-    return render_template('index.html',logged_in='logged_in' in session,name=username)
+    return render_template('index.html',logged_in='logged_in' in session,name=username,profilePic=avatar)
 
 @app.route('/login_page')
 def login_page():
@@ -103,8 +105,14 @@ def logout():
     session.pop('logged_in', None)
     return redirect('/')
 
-@app.route("/upload")
+@app.route("/upload", methods=['POST', 'GET'])
 def upload():
+    if request.method == 'POST':
+        f = request.files['file']
+        basepath = os.path.dirname(__file__)
+        upload_path = os.path.join(basepath, 'static/uploads', f.filename)
+        f.save(upload_path)
+        return redirect(url_for('download'))
     return render_template('upload.php')
 
 

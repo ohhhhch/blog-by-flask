@@ -8,6 +8,7 @@ with app.app_context():
         username=db.Column(db.String(16),nullable=False,unique=True)
         password=db.Column(db.String(16),nullable=False)
         email=db.Column(db.String(16),nullable=False)
+        avatar=db.Column(db.String(255),default='static\img\profilephoto.png')
 
 
 """    def find_user_by_name(self, username):
